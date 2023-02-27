@@ -9,4 +9,12 @@ struct Entry {
     }
 };
 
+void InvertedIndex::UpdateDocumentBase(){
+    using namespace std;
+    converter = new ConverterJSON();
+
+    docs = converter->GetTextDocuments();
+    converter->GetRequests();
+
+};
 

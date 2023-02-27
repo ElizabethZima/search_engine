@@ -1,10 +1,9 @@
 #include <iostream>
-#include <ConverterJSON.h>
+#include <InvertedIndex.h>
 
 int main() {
-    ConverterJSON *converter = new ConverterJSON();
-    std::cout << converter->GetTextDocuments()[0];
-    std::cout << converter->GetRequests()[0];
-    std::cout << converter->GetResponsesLimit();
+    InvertedIndex* index = new InvertedIndex();
+
+    index->UpdateDocumentBase();
     return 0;
 }
