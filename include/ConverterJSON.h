@@ -1,3 +1,5 @@
+#ifndef CONVERTERJSON_SEARCHSERVER_H
+#define CONVERTERJSON_SEARCHSERVER_H
 #include <iostream>
 #include <vector>
 #include <string>
@@ -22,4 +24,5 @@ public:
 
 };
 
+#endif //CONVERTERJSON_SEARCHSERVER_H
 

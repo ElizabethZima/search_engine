@@ -1,12 +1,11 @@
+#ifndef INVERTEDINDEX_SEARCHSERVER_H
+#define INVERTEDINDEX_SEARCHSERVER_H
 #include <iostream>
-#include <vector>
-#include <string>
-#include <fstream>
 #include <mutex>
 #include <map>
 #include <ConverterJSON.h>
 #include<thread>
-std::mutex IndexingMutex;
+//std::mutex IndexingMutex;
 
 struct Entry {
     size_t doc_id, count;
@@ -41,5 +40,7 @@ public:
 
 };
 
+
+#endif //INVERTEDINDEX_SEARCHSERVER_H
 
 

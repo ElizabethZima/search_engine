@@ -47,7 +47,7 @@ void InvertedIndex::Parse(int& numberOfDoc, std::string& document) {
 
 void InvertedIndex::fillFreqDictionary() {
     using namespace std;
-   IndexingMutex.lock();
+//   IndexingMutex.lock();
     for (int i = 0; i < docs.size(); i++) {
         thread call([&](){
             Parse(i, docs[i]);
@@ -55,25 +55,27 @@ void InvertedIndex::fillFreqDictionary() {
         call.join();
         if (call.joinable()) call.detach();
     } // thread call
-    IndexingMutex.unlock();
+   // IndexingMutex.unlock();
 }
 
 
 std::vector<Entry> InvertedIndex::GetWordCount(const std::string &word){
     using namespace std;
-    if (IndexingMutex.try_lock()) {
-        auto it = freq_dictionary.find(word);
-        if (it != freq_dictionary.end()) {
-            IndexingMutex.unlock();
-            return it->second;
-        } else {
-            return {};
-        }
-
-    } else {
-        std::cout << "Index is on going, please repeat the request later.\n";
+    //if (IndexingMutex.try_lock()) {
+//        auto it = freq_dictionary.find(word);
+//        if (it != freq_dictionary.end()) {
+//            IndexingMutex.unlock();
+//            return it->second;
+//        } else {
+//            return {};
+//        }
+//
+//    } else {
+//        std::cout << "Index is on going, please repeat the request later.\n";
+//        return {};
+//    }
+//
         return {};
-    }
 }
 
 
