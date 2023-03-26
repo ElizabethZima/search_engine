@@ -111,3 +111,7 @@ std::vector<std::string> ConverterJSON::GetRequests(){
 
     return requestsVec;
 }
+
+void ConverterJSON::PutAnswers(std::vector<std::vector<std::pair<int, float>>> answers) {
+
+}

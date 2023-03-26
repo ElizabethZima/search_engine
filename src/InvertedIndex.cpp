@@ -61,7 +61,7 @@ void InvertedIndex::fillFreqDictionary() {
 
 std::vector<Entry> InvertedIndex::GetWordCount(const std::string &word){
     using namespace std;
-    //if (IndexingMutex.try_lock()) {
+//    if (IndexingMutex.try_lock()) {
 //        auto it = freq_dictionary.find(word);
 //        if (it != freq_dictionary.end()) {
 //            IndexingMutex.unlock();
@@ -74,7 +74,7 @@ std::vector<Entry> InvertedIndex::GetWordCount(const std::string &word){
 //        std::cout << "Index is on going, please repeat the request later.\n";
 //        return {};
 //    }
-//
+
         return {};
 }
 
