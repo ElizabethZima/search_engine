@@ -18,12 +18,12 @@ struct Entry {
 
 
 
-class InvertedIndex : ConverterJSON{
+class InvertedIndex {
 
 private:
     std::vector<std::string> docs; // список содержимого документов
     std::map<std::string, std::vector<Entry>> freq_dictionary; // частотный словарь
-
+    ConverterJSON* converter = new ConverterJSON();
 
 public:
     void addToFreqDictionary(std::string word , int & numberOfDoc); //add or count++ to the word

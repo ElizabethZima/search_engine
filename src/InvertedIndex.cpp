@@ -2,8 +2,8 @@
 
 void InvertedIndex::UpdateDocumentBase(){
     using namespace std;
-    docs = GetTextDocuments();
-    GetRequests();
+    docs = converter->GetTextDocuments();
+   // GetRequests();
     fillFreqDictionary();
 }
 
@@ -61,15 +61,15 @@ void InvertedIndex::fillFreqDictionary() {
 
 std::vector<Entry> InvertedIndex::GetWordCount(const std::string &word){
     using namespace std;
-//    if (IndexingMutex.try_lock()) {
-//        auto it = freq_dictionary.find(word);
-//        if (it != freq_dictionary.end()) {
-//            IndexingMutex.unlock();
-//            return it->second;
-//        } else {
-//            return {};
-//        }
-//
+    //if  (IndexingMutex.try_lock()) {
+        auto it = freq_dictionary.find(word);
+        if (it != freq_dictionary.end()) {
+           // IndexingMutex.unlock();
+            return it->second;
+        } else {
+            return {};
+        }
+
 //    } else {
 //        std::cout << "Index is on going, please repeat the request later.\n";
 //        return {};
