@@ -5,15 +5,14 @@ struct Config {
     int max_responses{};
 };
 
-struct Respone {
-    Config *configuration = new Config();
+struct Response {
+    Config configuration;
     std::vector<std::string> files;
 };
 
 void ConverterJSON::GetResponses() {
         using namespace std;
         nlohmann::json respones;
-        resp = new Respone();
 
         try {
             ifstream inputFile("jsons/config.json");
@@ -24,9 +23,9 @@ void ConverterJSON::GetResponses() {
                 inputFile >> respones;
 
 
-                resp->configuration->name = respones["config"]["name"];
-                resp->configuration->version = respones["config"]["version"];
-                resp->configuration->max_responses = respones["config"]["max_responses"];
+                resp->configuration.name = respones["config"]["name"];
+                resp->configuration.version = respones["config"]["version"];
+                resp->configuration.max_responses = respones["config"]["max_responses"];
 
 
                 for (const auto& f : respones["files"]) {
@@ -47,7 +46,7 @@ void ConverterJSON::GetResponses() {
 
 
 int ConverterJSON::GetResponsesLimit(){
-    return resp->configuration->max_responses;
+    return resp->configuration.max_responses;
 }
 
 
@@ -78,13 +77,10 @@ std::vector<std::string> ConverterJSON::GetTextDocuments(){
     return documents;
 }
 
-std::vector<std::string> ConverterJSON::GetRequests(){
+std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
     using namespace std;
 
-    std::vector<std::string> requestsVec;
     nlohmann::json inputRequests;
-
-
 
     try {
         ifstream inputFile("jsons/requests.json");
@@ -95,13 +91,25 @@ std::vector<std::string> ConverterJSON::GetRequests(){
 
             inputFile >> inputRequests;
 
-            for (const auto& f : inputRequests["requests"]) {
+            for(int i = 0 ; i < inputRequests.size(); i++) {
+                    string nameRequest = "request" + i;
 
-                requestsVec.push_back(f);
-
+                    //vector of words and split function !!!
             }
+}            //parse request to vector
+            //
+            //
+            //
+            //
 
-        }
+
+//            for (const auto& f : inputRequests["requests"]) {
+//
+//                requestsVec.push_back(f);
+//
+//            }
+
+     //   }
 
         inputFile.close();
     }
@@ -109,9 +117,13 @@ std::vector<std::string> ConverterJSON::GetRequests(){
         cerr  <<  "File not founded or Empty!"<< endl;
     }
 
-    return requestsVec;
+   // return requestsVec;   ????
+
 }
 
 void ConverterJSON::PutAnswers(std::vector<std::vector<std::pair<int, float>>> answers) {
-
+    //if rank != 0
+    // result false / true for all requests
 }
+
+
