@@ -23,20 +23,17 @@ class InvertedIndex {
 private:
     std::vector<std::string> docs; // список содержимого документов
     std::map<std::string, std::vector<Entry>> freq_dictionary; // частотный словарь
-    ConverterJSON* converter = new ConverterJSON();
+    std::map<std::string, std::vector<std::string>> requests;
 
 public:
-    void addToFreqDictionary(std::string word , int & numberOfDoc); //add or count++ to the word
-
-    void Parse(int& numberOfDoc, std::string& document); // parse for string document
-
-    InvertedIndex() = default;
+   InvertedIndex() = default;
 
     void UpdateDocumentBase();
 
-    void fillFreqDictionary();
-
     std::vector<Entry> GetWordCount(const std::string &word);
+    void Parse(int& numberOfDoc, std::string& document); // parse for string document
+    void addToFreqDictionary(std::string& word , int & numberOfDoc); //add or count++ to the word
+    void fillFreqDictionary();
 
 };
 

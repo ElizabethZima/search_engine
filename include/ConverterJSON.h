@@ -5,18 +5,18 @@
 #include <string>
 #include <fstream>
 #include <exception>
+#include <sstream>
+#include <map>
 #include "nlohmann/json.hpp"
 
-struct Config;
-struct Response;
-
 class ConverterJSON {
+private:
+    std::string name, version;
+    int max_responses;
+    std::vector<std::string> files;
 public:
 
-    Response* resp;
     ConverterJSON() = default;
-
-
 
     void GetResponses() ;
     int GetResponsesLimit();
@@ -24,6 +24,7 @@ public:
     std::map<std::string, std::vector<std::string>> GetRequests();
     void PutAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
 
+    std::vector<std::string> ParseRequest(std::string string);
 };
 
 #endif //CONVERTERJSON_SEARCHSERVER_H

@@ -31,6 +31,8 @@ std::vector<RelativeIndex> SearchServer::search(const std::vector<std::string>& 
     using namespace std;
     std::vector<RelativeIndex> result(5);
 
+
+
     if (queries_input.empty())
     {
         std::cout << "Requests are empty.\n";

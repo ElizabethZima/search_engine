@@ -2,12 +2,13 @@
 
 void InvertedIndex::UpdateDocumentBase(){
     using namespace std;
+    ConverterJSON* converter = new ConverterJSON();
     docs = converter->GetTextDocuments();
-   // GetRequests();
+    //requests = converter->GetRequests(); // solve problem with assignment !!! you can check that function too
     fillFreqDictionary();
 }
 
-void InvertedIndex::addToFreqDictionary(std::string word , int & numberOfDoc){
+void InvertedIndex::addToFreqDictionary(std::string& word , int & numberOfDoc){
     auto iter = freq_dictionary.find(word); // search key in freq dictionary
 
     if (iter != freq_dictionary.end()) {

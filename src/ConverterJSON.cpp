@@ -1,20 +1,26 @@
 #include "ConverterJSON.h"
 
-struct Config {
-    std::string name, version;
-    int max_responses{};
-};
+std::string nameToRequest(int max, int i) { // name to "request0010"
+    std::string str = std::to_string(max);
+    std::string number = std::to_string(i);
+    std::ostringstream ss;
+    if(str.size() <= 3){
+        ss << std::setw(3) << std::setfill('0') << number;
+    }
+    else {
+        ss << std::setw(str.size()) << std::setfill('0') << number;
+    }
+    std::string result = ss.str();
+    return "request" + result;
+}
 
-struct Response {
-    Config configuration;
-    std::vector<std::string> files;
-};
 
 void ConverterJSON::GetResponses() {
         using namespace std;
         nlohmann::json respones;
 
-        try {
+
+    try {
             ifstream inputFile("jsons/config.json");
 
             if (inputFile.eof() || !inputFile.is_open()) throw invalid_argument("Error reading");
@@ -22,17 +28,15 @@ void ConverterJSON::GetResponses() {
             else {
                 inputFile >> respones;
 
+               name = respones["config"]["name"];
+               version = respones["config"]["version"];
+               max_responses = respones["config"]["max_responses"];
 
-                resp->configuration.name = respones["config"]["name"];
-                resp->configuration.version = respones["config"]["version"];
-                resp->configuration.max_responses = respones["config"]["max_responses"];
-
-
-                for (const auto& f : respones["files"]) {
-
-                    resp->files.push_back(f);
-
+                files.clear();
+                for (const auto& f: respones["files"]) {
+                    files.push_back(f);
                 }
+
 
                 inputFile.close();
             }
@@ -46,7 +50,7 @@ void ConverterJSON::GetResponses() {
 
 
 int ConverterJSON::GetResponsesLimit(){
-    return resp->configuration.max_responses;
+    return max_responses;
 }
 
 
@@ -56,7 +60,7 @@ std::vector<std::string> ConverterJSON::GetTextDocuments(){
 
     vector<string> documents;
 
-    for (const auto& f : resp->files){
+    for (auto& f : files){
 
         ifstream inputFile(f);
 
@@ -79,7 +83,7 @@ std::vector<std::string> ConverterJSON::GetTextDocuments(){
 
 std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
     using namespace std;
-
+    std::map<std::string, std::vector<std::string>> result;
     nlohmann::json inputRequests;
 
     try {
@@ -90,26 +94,16 @@ std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
         else {
 
             inputFile >> inputRequests;
-
-            for(int i = 0 ; i < inputRequests.size(); i++) {
-                    string nameRequest = "request" + i;
-
-                    //vector of words and split function !!!
+            int numRequests = 1;
+            for (auto& newRequest: inputRequests["requests"]){
+                string nameRequest = nameToRequest(max_responses, numRequests);
+                result.insert(make_pair(nameRequest, ParseRequest(newRequest)));
+                numRequests++;
             }
-}            //parse request to vector
-            //
-            //
-            //
-            //
+
+        }
 
 
-//            for (const auto& f : inputRequests["requests"]) {
-//
-//                requestsVec.push_back(f);
-//
-//            }
-
-     //   }
 
         inputFile.close();
     }
@@ -117,7 +111,7 @@ std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
         cerr  <<  "File not founded or Empty!"<< endl;
     }
 
-   // return requestsVec;   ????
+    return result;
 
 }
 
@@ -125,5 +119,31 @@ void ConverterJSON::PutAnswers(std::vector<std::vector<std::pair<int, float>>> a
     //if rank != 0
     // result false / true for all requests
 }
+
+std::vector<std::string> ConverterJSON::ParseRequest(std::string request) {
+    using namespace std;
+    request += " ";
+    vector<string> result{};
+    string word;
+    for (int i = 0; i < request.size(); i++) {
+        if ( word.empty() && (request[i] == ',' || request[i] == ';' )) i++;
+        else if (request[i] != ' ' && request[i] != ',' && request[i] != ';' && i + 1 != request.size()) word += request[i];
+        else if (i + 1 == request.size() && !word.empty()){
+            result.push_back(word);
+            word.clear();
+        }
+        else if (!word.empty() ) {
+            result.push_back(word);
+            word.clear();
+        }
+
+    }
+    return result;
+}
+
+
+
+
+
 
 
