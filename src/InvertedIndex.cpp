@@ -26,6 +26,7 @@ void InvertedIndex::addToFreqDictionary(std::string& word , int & numberOfDoc){
         s[numberOfDoc].count += 1;
         freq_dictionary.insert(make_pair(word, s));
     }
+
 }
 
 void InvertedIndex::Parse(int& numberOfDoc, std::string& document) {
@@ -61,7 +62,7 @@ void InvertedIndex::fillFreqDictionary() {
 }
 
 
-std::vector<Entry> InvertedIndex::GetWordCount(const std::string &word){
+std::vector<Entry> InvertedIndex::GetWordCount(std::string &word){
     using namespace std;
     //if  (IndexingMutex.try_lock()) {
         auto it = freq_dictionary.find(word);
@@ -78,6 +79,14 @@ std::vector<Entry> InvertedIndex::GetWordCount(const std::string &word){
 //    }
 
         return {};
+}
+
+std::map<std::string, std::vector<std::string>> InvertedIndex::GetRequests() {
+    return requests;
+}
+
+int InvertedIndex::GetNumberOfDoc() {
+    return docs.size();
 }
 
 

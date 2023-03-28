@@ -1,6 +1,9 @@
 #ifndef SEARCH_ENGINE_SEARCHSERVER_H
 #define SEARCH_ENGINE_SEARCHSERVER_H
 #include "InvertedIndex.h"
+#include <iterator>
+#include <vector>
+#include <map>
 
 
 struct RelativeIndex{
@@ -26,7 +29,7 @@ requests.json
 * @return возвращает отсортированный список релевантных ответов для
 заданных запросов
 */
-    std::vector<RelativeIndex> search(const std::vector<std::string>& queries_input);
+    std::map<std::string, std::vector<RelativeIndex>> search(std::map<std::string, std::vector<std::string>> requests);
 private:
     InvertedIndex index;
 };

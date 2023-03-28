@@ -30,10 +30,13 @@ public:
 
     void UpdateDocumentBase();
 
-    std::vector<Entry> GetWordCount(const std::string &word);
+    std::vector<Entry> GetWordCount(std::string &word);
     void Parse(int& numberOfDoc, std::string& document); // parse for string document
     void addToFreqDictionary(std::string& word , int & numberOfDoc); //add or count++ to the word
     void fillFreqDictionary();
+
+    std::map<std::string, std::vector<std::string>> GetRequests();
+    int GetNumberOfDoc();
 
 };
 

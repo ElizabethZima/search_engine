@@ -7,9 +7,7 @@ int main() {
 
     SearchServer* server = new SearchServer(*index);
 
-    std::vector<std::string> queries{"milk", "sugar", "salt"};  //  support many words ???
-
-    server->search(queries);
+   server->search(index->GetRequests());
 
     return 0;
 }
