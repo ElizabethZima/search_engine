@@ -4,7 +4,8 @@ void InvertedIndex::UpdateDocumentBase(){
     using namespace std;
     ConverterJSON* converter = new ConverterJSON();
     docs = converter->GetTextDocuments();
-    //requests = converter->GetRequests(); // solve problem with assignment !!! you can check that function too
+    requests = converter->GetRequests();
+
     fillFreqDictionary();
 }
 

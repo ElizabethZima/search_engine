@@ -1,4 +1,5 @@
 #include <iostream>
+#include "InvertedIndex.h"
 #include "SearchServer.h"
 int main() {
     InvertedIndex* index = new InvertedIndex();

@@ -112,7 +112,6 @@ std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
     }
 
     return result;
-
 }
 
 void ConverterJSON::PutAnswers(std::vector<std::vector<std::pair<int, float>>> answers) {

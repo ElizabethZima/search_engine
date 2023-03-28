@@ -21,7 +21,7 @@ public:
     void GetResponses() ;
     int GetResponsesLimit();
     std::vector<std::string> GetTextDocuments();
-    std::map<std::string, std::vector<std::string>> GetRequests();
+    std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests();
     void PutAnswers(std::vector<std::vector<std::pair<int, float>>> answers);
 
     std::vector<std::string> ParseRequest(std::string string);
