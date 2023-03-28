@@ -8,6 +8,7 @@
 #include <sstream>
 #include <map>
 #include "nlohmann/json.hpp"
+#include "SearchServer.h"
 
 struct RelativeIndex ;
 
@@ -24,7 +25,7 @@ public:
     int GetResponsesLimit();
     std::vector<std::string> GetTextDocuments();
     std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests();
-   // void PutAnswers(std::map<std::string, std::vector<RelativeIndex>> answers);
+    void PutAnswers(std::map<std::string, std::vector<RelativeIndex>> answers);
 
     std::vector<std::string> ParseRequest(std::string string);
 };

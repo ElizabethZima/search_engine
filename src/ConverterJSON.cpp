@@ -103,8 +103,6 @@ std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
 
         }
 
-
-
         inputFile.close();
     }
     catch (...){
@@ -114,25 +112,28 @@ std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
     return result;
 }
 
-//void ConverterJSON::PutAnswers(std::map<std::string, std::vector<RelativeIndex>> answers) {
-//  //  std::ofstream outputFile("jsons/answers.json");
-//  //  if(outputFile.is_open()){
-//   //     nlohmann::json answerDictionary;
-//
-//  //      for (auto it = answers.begin(); it != answers.end(); it++) {
-// //           answerDictionary["answers"][it->first]["result"]= !it->second.empty();
-//  //          if(!it->second.empty()){
-////                for (int i = 0; i < it->second.size(); i++) {
-////                    if(iter) {
-////                        answerDictionary["answers"][it->first]["result"][]
-////                    }
-////                    iter++;
-////                }
-//
-// //           }
-//  //      }
-//  //  }
-//}
+void ConverterJSON::PutAnswers(std::map<std::string, std::vector<RelativeIndex>> answers) {
+    std::ofstream outputFile("jsons/answers.json");
+    if(outputFile.is_open()){
+        nlohmann::json answerDictionary;
+
+        for (auto it = answers.begin(); it != answers.end(); it++) {
+            answerDictionary["answers"][it->first]["result"] = it->second.empty();
+            if(!it->second.empty()){
+//                for (int i = 0; i < it->second.size(); i++) {
+//                    if(iter) {
+//                        answerDictionary["answers"][it->first]["result"][]
+//                    }
+//                    iter++;
+//                }
+
+            }
+        }
+
+        outputFile << answerDictionary;
+        outputFile.close();
+    }
+}
 
 std::vector<std::string> ConverterJSON::ParseRequest(std::string request) {
     using namespace std;

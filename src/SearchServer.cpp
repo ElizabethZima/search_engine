@@ -20,6 +20,7 @@ void sortSearchResult(std::vector<RelativeIndex>& results){ // sort results for 
 
 
 std::map<std::string, std::vector<RelativeIndex>> SearchServer::search(std::map<std::string, std::vector<std::string>> requests){
+    using namespace std;
     std::map<std::string, std::vector<RelativeIndex>>  result;
 
     if (requests.empty())
@@ -38,8 +39,8 @@ std::map<std::string, std::vector<RelativeIndex>> SearchServer::search(std::map<
                 std::vector<Entry> wordFrequency = index.GetWordCount(it->second[j]);
                 if (wordFrequency.size() != 0) {
                     for (int i = 0; i < wordFrequency.size(); i++) {
-                        res[i].doc_id = wordFrequency[i].doc_id;
-                        res[i].rank += wordFrequency[i].count / 2;
+                            res[i].doc_id = wordFrequency[i].doc_id;
+                            res[i].rank += wordFrequency[i].count / 2;
                     }
                 }
             }
@@ -49,10 +50,12 @@ std::map<std::string, std::vector<RelativeIndex>> SearchServer::search(std::map<
                     res[i].rank /= max;
             }
 
-            sortSearchResult(res); // wrong answer
+            sortSearchResult(res);
 
-            result.insert(std::make_pair(it->first, res));
+
         }
+        result.insert(std::make_pair(it->first, res));
+
 
     }
 
