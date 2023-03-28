@@ -1,4 +1,5 @@
 #include <iostream>
+#include "ConverterJSON.h"
 #include "InvertedIndex.h"
 #include "SearchServer.h"
 int main() {
@@ -6,8 +7,9 @@ int main() {
     index->UpdateDocumentBase();
 
     SearchServer* server = new SearchServer(*index);
+    ConverterJSON* conv = new ConverterJSON();
 
-   server->search(index->GetRequests());
+    server->search(index->GetRequests());
 
     return 0;
 }

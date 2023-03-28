@@ -1,14 +1,5 @@
 #include "SearchServer.h"
 
-
-/**
-* Метод обработки поисковых запросов
-* @param queries_input поисковые запросы взятые из файла
-requests.json
-* @return возвращает отсортированный список релевантных ответов для
-заданных запросов
-*/
-
 int find_max(std::vector<RelativeIndex>& ranks){
     int max = ranks[0].rank;
     for(auto y = 1; y < ranks.size(); y++){
@@ -52,22 +43,17 @@ std::map<std::string, std::vector<RelativeIndex>> SearchServer::search(std::map<
                     }
                 }
             }
-        }
-        else {
-            for (int i = 0; i < index.GetNumberOfDoc(); i++) {
-                res[i].doc_id = i;
-                res[i].rank = 0;
+            int max = find_max(res);
+            for(int i = 0; i < res.size(); i++){
+                if(max != 0)
+                    res[i].rank /= max;
             }
-        }
-        int max = find_max(res);
-        for(int i = 0; i < res.size(); i++){
-            if(max != 0)
-            res[i].rank /= max;
+
+            sortSearchResult(res); // wrong answer
+
+            result.insert(std::make_pair(it->first, res));
         }
 
-        sortSearchResult(res); // wrong answer
-
-        result.insert(std::make_pair(it->first, res));
     }
 
     return result;

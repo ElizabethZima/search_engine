@@ -89,3 +89,13 @@
 1232	1387	7017374021727474	search_engine.exe	4188098310e2ebc1
 0	1242	7017374418177646	CMakeFiles/search_engine.dir/src/SearchServer.cpp.obj	369c5ba28b485d30
 1244	1390	7017374419447626	search_engine.exe	4188098310e2ebc1
+1	1218	7017376320435014	CMakeFiles/search_engine.dir/src/SearchServer.cpp.obj	369c5ba28b485d30
+1219	1363	7017376321655025	search_engine.exe	4188098310e2ebc1
+0	1495	7017389210590752	CMakeFiles/search_engine.dir/main.cpp.obj	60109a7fa2d35b49
+8	1500	7017389210630785	CMakeFiles/search_engine.dir/src/SearchServer.cpp.obj	369c5ba28b485d30
+4	1094	7017389956778363	CMakeFiles/search_engine.dir/main.cpp.obj	60109a7fa2d35b49
+0	1192	7017391068995091	CMakeFiles/search_engine.dir/main.cpp.obj	60109a7fa2d35b49
+1	1238	7017391744227357	CMakeFiles/search_engine.dir/src/ConverterJSON.cpp.obj	a781bc7917ce9956
+1241	1512	7017391746627363	search_engine.exe	4188098310e2ebc1
+0	1041	7017391826100146	CMakeFiles/search_engine.dir/main.cpp.obj	60109a7fa2d35b49
+1044	1179	7017391827289724	search_engine.exe	4188098310e2ebc1

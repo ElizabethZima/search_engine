@@ -114,10 +114,25 @@ std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
     return result;
 }
 
-void ConverterJSON::PutAnswers(std::vector<std::vector<std::pair<int, float>>> answers) {
-    //if rank != 0
-    // result false / true for all requests
-}
+//void ConverterJSON::PutAnswers(std::map<std::string, std::vector<RelativeIndex>> answers) {
+//  //  std::ofstream outputFile("jsons/answers.json");
+//  //  if(outputFile.is_open()){
+//   //     nlohmann::json answerDictionary;
+//
+//  //      for (auto it = answers.begin(); it != answers.end(); it++) {
+// //           answerDictionary["answers"][it->first]["result"]= !it->second.empty();
+//  //          if(!it->second.empty()){
+////                for (int i = 0; i < it->second.size(); i++) {
+////                    if(iter) {
+////                        answerDictionary["answers"][it->first]["result"][]
+////                    }
+////                    iter++;
+////                }
+//
+// //           }
+//  //      }
+//  //  }
+//}
 
 std::vector<std::string> ConverterJSON::ParseRequest(std::string request) {
     using namespace std;
