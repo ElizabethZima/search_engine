@@ -6,6 +6,7 @@
 #include <fstream>
 #include <exception>
 #include <sstream>
+#include <math.h>
 #include <map>
 #include "nlohmann/json.hpp"
 #include "SearchServer.h"

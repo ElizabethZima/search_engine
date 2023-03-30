@@ -60,6 +60,7 @@ for(auto it = answers.begin(); it != answers.end(); it++) {
 return false;
 }
 
+
 std::vector<std::string> ConverterJSON::GetTextDocuments(){
     using namespace std;
     GetResponses();
@@ -123,17 +124,18 @@ void ConverterJSON::PutAnswers(std::map<std::string, std::vector<RelativeIndex>>
     if(outputFile.is_open()){
         nlohmann::json answerDictionary;
         auto relevance_array = nlohmann::json::array(); // array for docid and rank in json
-        for (auto it = answers.begin(); it != answers.end(); it++) { // traversing an array of responses for all requests
-           if(isClear(it->second)) { //check if it empty (not that word in files )
+        for (auto it = answers.begin(); it != answers.end(); it++) { // requests aray
+           if(isClear(it->second)) { //check empty (not that word in files )
 
                answerDictionary["answers"][it->first]["result"] = true; // for result
 
-               for (auto iter = it->second.begin(); iter != it->second.end(); iter++) { //traversing an array of one reques
-                   if (iter - it->second.begin() > max_responses) break; // check max_responses
+               for (auto iter = it->second.begin(); iter != it->second.end(); iter++) { //aray of docid and rank
+                   if ((iter - it->second.begin()) > 5) break; // check max_responses
 
                    auto relevance_member = nlohmann::json::object();
-                   relevance_member["docid"] = iter->doc_id + 1;
+                   relevance_member["docid"] = iter->doc_id;
                    relevance_member["rank"] = iter->rank;
+
                    relevance_array.push_back(relevance_member);
 
                    }
