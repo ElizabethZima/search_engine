@@ -53,6 +53,12 @@ int ConverterJSON::GetResponsesLimit(){
     return max_responses;
 }
 
+bool isClear(std::vector<RelativeIndex>& answers){
+for(auto it = answers.begin(); it != answers.end(); it++) {
+    if (it->rank != 0)return true;
+}
+return false;
+}
 
 std::vector<std::string> ConverterJSON::GetTextDocuments(){
     using namespace std;
@@ -112,22 +118,30 @@ std::map<std::string, std::vector<std::string>> ConverterJSON::GetRequests(){
     return result;
 }
 
-void ConverterJSON::PutAnswers(std::map<std::string, std::vector<RelativeIndex>> answers) {
+void ConverterJSON::PutAnswers(std::map<std::string, std::vector<RelativeIndex>> answers, int max_responses) {
     std::ofstream outputFile("jsons/answers.json");
     if(outputFile.is_open()){
         nlohmann::json answerDictionary;
+        auto relevance_array = nlohmann::json::array(); // array for docid and rank in json
+        for (auto it = answers.begin(); it != answers.end(); it++) { // traversing an array of responses for all requests
+           if(isClear(it->second)) { //check if it empty (not that word in files )
 
-        for (auto it = answers.begin(); it != answers.end(); it++) {
-            answerDictionary["answers"][it->first]["result"] = it->second.empty();
-            if(!it->second.empty()){
-//                for (int i = 0; i < it->second.size(); i++) {
-//                    if(iter) {
-//                        answerDictionary["answers"][it->first]["result"][]
-//                    }
-//                    iter++;
-//                }
+               answerDictionary["answers"][it->first]["result"] = true; // for result
 
-            }
+               for (auto iter = it->second.begin(); iter != it->second.end(); iter++) { //traversing an array of one reques
+                   if (iter - it->second.begin() > max_responses) break; // check max_responses
+
+                   auto relevance_member = nlohmann::json::object();
+                   relevance_member["docid"] = iter->doc_id + 1;
+                   relevance_member["rank"] = iter->rank;
+                   relevance_array.push_back(relevance_member);
+
+                   }
+               answerDictionary["answers"][it->first]["relevance"] = relevance_array;
+           }
+           else{
+               answerDictionary["answers"][it->first]["result"] = false;
+           }
         }
 
         outputFile << answerDictionary;

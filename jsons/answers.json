@@ -1,5 +1,1 @@
-{"answers":{
-  "request001":{
-    "result":false
-  },
-  "request002":{"result":false},"request003":{"result":false},"request004":{"result":false}}}
+{"answers":{"request001":[{"docid":2,"rank":1.0}],"request002":[{"docid":2,"rank":1.0},{"docid":1,"rank":1.0}],"request003":[{"docid":2,"rank":1.0},{"docid":1,"rank":1.0},{"docid":5,"rank":1.0}],"request004":{"result":false}}}

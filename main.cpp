@@ -9,7 +9,7 @@ int main() {
     SearchServer* server = new SearchServer(*index);
     ConverterJSON* conv = new ConverterJSON();
 
-    conv->PutAnswers(server->search(index->GetRequests()));
+    conv->PutAnswers(server->search(index->GetRequests()), conv->GetResponsesLimit());
 
     return 0;
 }
