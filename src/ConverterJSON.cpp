@@ -131,7 +131,7 @@ void ConverterJSON::PutAnswers(std::map<std::string, std::vector<RelativeIndex>>
 
                for (auto iter = it->second.begin(); iter != it->second.end(); iter++) { //aray of docid and rank
                    if ((iter - it->second.begin()) > 5) break; // check max_responses
-
+                    if (iter->rank == 0) break;
                    auto relevance_member = nlohmann::json::object();
                    relevance_member["docid"] = iter->doc_id;
                    relevance_member["rank"] = iter->rank;
